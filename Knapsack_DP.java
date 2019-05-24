@@ -2,27 +2,33 @@
 /*
 Example run:
 ===========
+
 Enter the number of items: 
-7
+4
 Enter the items weights: 
 2
+1
 3
-5
-7
-1
-4
-1
+2
 Enter the items values: 
+12
 10
-5
+20
 15
-7
-6
-18
-3
 Enter the maximum capacity: 
-15
-The maximum value that can be put in a knapsack of capacity W is: 54
+5
+
+
+Table
+
+
+0	0	0	0	0	0	
+0	0	12	12	12	12	
+0	10	12	22	22	22	
+0	10	12	22	30	32	
+0	10	15	25	30	37	
+
+The maximum value that can be put in a knapsack of capacity W is: 37
 
 */
 import java.util.*;
@@ -33,6 +39,8 @@ public class Knapsack_DP
     { 
         return (a > b)? a : b; 
     }
+
+	
     static int knapSack(int W, int wt[], int val[], int n)
     {
         int i, w;
@@ -59,8 +67,21 @@ public class Knapsack_DP
                     K[i][w] = K[i-1][w];
             }
         }
+	
+	/*
+	Print the Table
+	 ##NOTE## 
+	 (1)no of (rows is no of items + 1)
+	 (2)no of columns is (max capacity + 1)
+	*/	
 	System.out.println("\n\nTable\n\n");
- 	System.out.println(Arrays.deepToString(K));
+ 	for(i=0;i<=n;i++)
+	{	for(int j=0;j<=n+1;j++)
+			System.out.print(K[i][j]+"\t");
+
+		System.out.println();
+	}
+	
         return K[n][W];
     }
  
@@ -81,8 +102,12 @@ public class Knapsack_DP
  
         System.out.println("Enter the maximum capacity: ");
         int W = sc.nextInt();
- 
-        System.out.println("The maximum value that can be put in a knapsack of capacity W is: " + knapSack(W, wt, val, n));
+ 	
+	
+
+        System.out.println("\nThe maximum value that can be put in a knapsack of capacity W is: " + knapSack(W, wt, val, n));
+	
+
         sc.close();
     }
 }
